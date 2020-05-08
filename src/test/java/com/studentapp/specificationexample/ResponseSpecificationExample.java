@@ -3,6 +3,5 @@ package com.studentapp.specificationexample;
 /**
  * Created by Jay
  */
-public class RequestSpecification {
-
+public class ResponseSpecificationExample {
 }
