@@ -14,6 +14,7 @@ public class LoggingResponseDetails {
     @Test
     public void test001() {
         System.out.println("---------------Printing Response Headers------------------");
+        //home work
 
     }
 
@@ -24,6 +25,7 @@ public class LoggingResponseDetails {
     @Test
     public void test002() {
         System.out.println("---------------Printing Response Status Line------------------");
+        //home work
 
     }
 
@@ -34,6 +36,7 @@ public class LoggingResponseDetails {
     @Test
     public void test003() {
         System.out.println("---------------Printing Response Body------------------");
+        //home work
 
     }
 
@@ -43,6 +46,7 @@ public class LoggingResponseDetails {
     @Test
     public void test004() {
         System.out.println("---------------Printing Response Body in case of an error------------------");
+        //home work
 
     }
 

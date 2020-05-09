@@ -1,8 +1,7 @@
 package com.studentapp.studentinfo;
 
-import io.restassured.RestAssured;
+import com.studentapp.testbase.TestBase;
 import io.restassured.response.Response;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
@@ -10,13 +9,8 @@ import static io.restassured.RestAssured.given;
 /**
  * Created by Jay
  */
-public class StudentGetTest {
+public class StudentGetTest extends TestBase {
 
-    @BeforeClass
-    public static void init() {
-        RestAssured.baseURI = "http://localhost:8080";
-        RestAssured.basePath = "/student";
-    }
 
     @Test
     public void getAllStudentsInfo() {
