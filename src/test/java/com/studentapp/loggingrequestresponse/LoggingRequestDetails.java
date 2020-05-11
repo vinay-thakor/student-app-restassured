@@ -60,7 +60,7 @@ public class LoggingRequestDetails extends TestBase {
         StudentPojo studentPojo = new StudentPojo();
         studentPojo.setFirstName("Prime");
         studentPojo.setLastName("Testing");
-        studentPojo.setEmail("abc123@gmail.com");
+        studentPojo.setEmail("abc1123@gmail.com");
         studentPojo.setProgramme("Automation Testing");
         studentPojo.setCources(course);
 
@@ -78,9 +78,31 @@ public class LoggingRequestDetails extends TestBase {
      * This test will print out All the details
      */
     @Test
-    public void test004() {
-        System.out.println("---------------Printing All the Request Details------------------");
-        //home work
+    public void test04() {
+
+
+        List<String> course = new ArrayList<>();
+        course.add("Selenium");
+        course.add("Java");
+
+        StudentPojo studentPojo = new StudentPojo();
+        studentPojo.setFirstName("Prime");
+        studentPojo.setLastName("Testing");
+        studentPojo.setEmail("abc11222@gmail.com");
+        studentPojo.setProgramme("Automation Testing");
+        studentPojo.setCources(course);
+
+
+        Response response = given()
+                .header("Content-Type", "application/json")
+                .log()
+                .all()
+                .when()
+                .body(studentPojo)
+                .post();
+        response.then().statusCode(201);
+
+
     }
 
 
@@ -89,7 +111,30 @@ public class LoggingRequestDetails extends TestBase {
      */
     @Test
     public void test005() {
-        System.out.println("---------------Printing All the Request Details if validation fails------------------");
-        //home work
+
+
+        List<String> course = new ArrayList<>();
+        course.add("Selenium");
+        course.add("Java");
+
+        StudentPojo studentPojo = new StudentPojo();
+        studentPojo.setFirstName("Prime");
+        studentPojo.setLastName("Testing");
+        studentPojo.setEmail("abc11222@gmail.com");
+        studentPojo.setProgramme("Automation Testing");
+        studentPojo.setCources(course);
+
+
+        Response response = given()
+
+                .log()
+                .ifValidationFails()
+                .header("Content-Type", "application/json")
+                .when()
+                .body(studentPojo)
+                .post();
+        response.then().statusCode(201);
+
+
     }
 }

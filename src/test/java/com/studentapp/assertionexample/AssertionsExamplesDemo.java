@@ -12,7 +12,7 @@ public class AssertionsExamplesDemo {
     private static final String API_KEY = "75e3u4sgb2khg673cbv2gjup";
 
     @BeforeClass
-    public static void inIt(){
+    public static void inIt() {
         RestAssured.baseURI = "http://api.walmartlabs.com";
         RestAssured.basePath = "/v1";
     }
@@ -22,7 +22,7 @@ public class AssertionsExamplesDemo {
     @Test
     public void test001() {
 
-         given()
+        given()
                 .queryParam("query", "ipod")
                 .queryParam("format", "json")
                 .queryParam("apiKey", API_KEY)
@@ -36,8 +36,15 @@ public class AssertionsExamplesDemo {
     // 2) Verify Query = ipod
     @Test
     public void test002() {
+        given()
+                .queryParam("query", "ipod")
+                .queryParam("format", "json")
+                .queryParam("apiKey", API_KEY)
+                .when()
+                .get("/search")
+                .then()
+                .body("query", equalTo("ipod"));
 
-        //Home work
 
     }
 
@@ -59,7 +66,16 @@ public class AssertionsExamplesDemo {
     // 4) Check Multiple Names in ArrayList (Apple iPod touch 7th Generation 128GB - Gold (New Model)","Apple iPod touch 16GB)
     @Test
     public void test004() {
-        //Homework
+
+        given()
+                .queryParam("query", "ipod")
+                .queryParam("format", "json")
+                .queryParam("apiKey", API_KEY)
+                .when()
+                .get("/search")
+                .then()
+                .body("items.name", hasItem("Apple iPod touch 7th Generation 32GB - Space Gray (New Model)"));
+
 
     }
 
@@ -84,6 +100,15 @@ public class AssertionsExamplesDemo {
         //Home work
         //.body("items.findAll{it.categoryPath=='Electronics/Portable Audio/Apple iPods/iPod Touch'}", hasItems(hasEntry("name", "Apple iPod touch 7th Generation 32GB - Space Gray (New Model)")));
 
+        given()
+                .queryParam("query", "ipod")
+                .queryParam("format", "json")
+                .queryParam("apiKey", API_KEY)
+                .when()
+                .get("/search")
+                .then()
+                .body("items[3,5].categoryPath", hasItem("Home Page/Electronics/Portable Audio/Apple iPods/iPod Touch"));
+
     }
 
     // 7) Checking multiple values in the same statement
@@ -96,9 +121,11 @@ public class AssertionsExamplesDemo {
                 .when()
                 .get("/search")
                 .then()
+                //is kind of hard assert and
                 .body("items[0].imageEntities[0]", hasKey("entityType"))
                 .body("numItems", equalTo(10))
                 .body("items.name", hasItem("Apple iPod touch 7th Generation 32GB - Space Gray (New Model)"));
+
 
     }
 

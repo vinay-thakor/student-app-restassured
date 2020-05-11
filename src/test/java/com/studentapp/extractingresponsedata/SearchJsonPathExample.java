@@ -17,7 +17,7 @@ public class SearchJsonPathExample {
     private static final String API_KEY = "75e3u4sgb2khg673cbv2gjup";
 
     @BeforeClass
-    public static void inIt(){
+    public static void inIt() {
         RestAssured.baseURI = "http://api.walmartlabs.com";
         RestAssured.basePath = "/v1";
     }
@@ -36,7 +36,7 @@ public class SearchJsonPathExample {
                 .extract().path("numItems");
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The total number of items are: " +numItem);
+        System.out.println("The total number of items are: " + numItem);
         System.out.println("------------------End of Test---------------------------");
 
     }
@@ -45,10 +45,18 @@ public class SearchJsonPathExample {
     @Test
     public void test002() {
 
-        //Home work
+        String query = given()
+                .queryParam("query", "ipod")
+                .queryParam("format", "json")
+                .queryParam("apiKey", API_KEY)
+                .when()
+                .get("/search")
+                .then()
+                .extract().path("query");
+
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The search query is: ");
+        System.out.println("The search query is: " + query);
         System.out.println("------------------End of Test---------------------------");
 
     }
@@ -74,11 +82,17 @@ public class SearchJsonPathExample {
     // 4) Get the first list from imageEntities for the first product
     @Test
     public void test004() {
-
-        //Home work
+        String imageEntity = given()
+                .queryParam("query", "ipod")
+                .queryParam("format", "json")
+                .queryParam("apiKey", API_KEY)
+                .when()
+                .get("/search")
+                .then()
+                .extract().path("items[0].imageEntities[0].thumbnailImage");
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The gift options under the first product are: ");
+        System.out.println("The gift options under the first product are: " + imageEntity);
         System.out.println("------------------End of Test---------------------------");
 
     }
@@ -87,10 +101,19 @@ public class SearchJsonPathExample {
     @Test
     public void test005() {
 
+        int numItem = given()
+                .queryParam("query", "ipod")
+                .queryParam("format", "json")
+                .queryParam("apiKey", API_KEY)
+                .when()
+                .get("/search")
+                .then()
+                .extract().path("");
+
         //Home work
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The size of the items is: ");
+        System.out.println("The size of the items is: " + numItem);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -98,11 +121,18 @@ public class SearchJsonPathExample {
     @Test
     public void test006() {
 
-        //Home work
+        List<String> itemName = given()
+                .queryParam("query", "ipod")
+                .queryParam("format", "json")
+                .queryParam("apiKey", API_KEY)
+                .when()
+                .get("/search")
+                .then()
+                .extract().path("items.findAll{it.name}.name");
 
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The names of the products are:: ");
+        System.out.println("The names of the products are:: " + itemName);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -121,19 +151,26 @@ public class SearchJsonPathExample {
 
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The values for item name Apple iPod touch 32GB  (Assorted Colors) are: " +values);
+        System.out.println("The values for item name Apple iPod touch 32GB  (Assorted Colors) are: " + values);
         System.out.println("------------------End of Test---------------------------");
     }
 
-    // 8) Get the sale price for Name == Apple iPod Touch 6th Generation 32GB Refurbished
+    // 8) Get the sale price for Name == Refurbished Apple iPod Touch 7th Generation 32GB Space Gray MVHW2LL/A
     @Test
     public void test008() {
 
-        // Home work
+        List<HashMap<String, Object>> values = given()
+                .queryParam("query", "ipod")
+                .queryParam("format", "json")
+                .queryParam("apiKey", API_KEY)
+                .when()
+                .get("/search")
+                .then()
+                .extract().path("items.findAll{it.name=='Refurbished Apple iPod Touch 7th Generation 32GB Space Gray MVHW2LL/A'}.salePrice");
 
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The sale price is ");
+        System.out.println("The sale price is " + values);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -152,7 +189,7 @@ public class SearchJsonPathExample {
 
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The names of items that price is less than 200 are: " +namesOfIpod);
+        System.out.println("The names of items that price is less than 200 are: " + namesOfIpod);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -171,7 +208,7 @@ public class SearchJsonPathExample {
 
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The msrp of items that start with Ref are: " +msrp);
+        System.out.println("The msrp of items that start with Ref are: " + msrp);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -190,7 +227,7 @@ public class SearchJsonPathExample {
 
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The msrp of items that end with ed are: " +salePrice);
+        System.out.println("The msrp of items that end with ed are: " + salePrice);
         System.out.println("------------------End of Test---------------------------");
     }
 

@@ -37,7 +37,7 @@ public class StudentPostTest extends TestBase {
                 .when()
                 .body(studentPojo)
                 .post();
-        response.then().statusCode(201);
+        response.then().statusCode(200);
         response.prettyPrint();
 
     }
